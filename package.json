@@ -1,0 +1,10 @@
+{
+    "name": "duo_web",
+    "version": "1.0",
+    "description": "Duo two-factor authentication for web applications",
+    "keywords": [
+        "Duo Security",
+        "Two-Factor Authentication"
+    ]
+  }
+}
