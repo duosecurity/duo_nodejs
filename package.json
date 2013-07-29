@@ -1,9 +1,22 @@
 {
-    "name": "duo_web",
-    "version": "1.0",
-    "description": "Duo two-factor authentication for web applications",
-    "keywords": [
-        "Duo Security",
-        "Two-Factor Authentication"
-    ]
+  "name": "duo_nodejs",
+  "version": "1.0.1",
+  "description": "Duo two-factor authentication for web applications",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodeunit tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/duosecurity/duo_nodejs/duo_nodejs.git"
+  },
+  "keywords": [
+    "Duo Security",
+    "Two-Factor Authentication"
+  ],
+  "author": "",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/duosecurity/duo_nodejs/issues"
+  }
 }
