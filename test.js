@@ -1,4 +1,4 @@
-var Duo = require('./duo');
+var Duo = require('./index');
 
 var IKEY = "DIXXXXXXXXXXXXXXXXXX";
 var SKEY = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef";

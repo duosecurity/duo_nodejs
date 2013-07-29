@@ -21,6 +21,18 @@ exports.ERR_IKEY = ERR_IKEY;
 exports.ERR_SKEY = ERR_SKEY;
 exports.ERR_AKEY = ERR_AKEY;
 
+/**
+ * @function sign a value
+ * 
+ * @param {String} key Integration's Secret Key
+ * @param {String} vals Value(s) to sign
+ * @param {String} prefix DUO/APP/AUTH Prefix
+ * @param {Integer} expire time till expiry
+ * 
+ * @return {String} Containing the signed value in sha1-hmac with prefix 
+ * 
+ * @api private
+ */
 function _sign_vals(key, vals, prefix, expire) {
     var exp = Math.round((new Date()).getTime() / 1000) + expire;
     
@@ -35,6 +47,17 @@ function _sign_vals(key, vals, prefix, expire) {
     return cookie + '|' + sig;
 }
 
+/**
+ * @function parses a value
+ * 
+ * @param {String} key Integration's Secret Key
+ * @param {String} val Value to unpack
+ * @param {String} prefix DUO/APP/AUTH Prefix
+ *
+ * @return {String/Null} Returns a username on successful parse. Null if not
+ * 
+ * @api private
+ */
 function _parse_vals(key, val, prefix) {
     var ts = Math.round((new Date()).getTime() / 1000);
     var parts = val.split('|');
@@ -74,6 +97,18 @@ function _parse_vals(key, val, prefix) {
     return user;
 }
 
+/**
+ * @function sign's a login request to be passed onto Duo Security
+ * 
+ * @param {String} ikey Integration Key
+ * @param {String} skey Secret Key
+ * @param {String} akey Application Security Key
+ * @param {String} username Username 
+ * 
+ * @return {String} Duo Signature
+ * 
+ * @api public
+ */
 exports.sign_request = function (ikey, skey, akey, username) {
     if (!username || username.length < 1) {
         return ERR_USER;
@@ -97,6 +132,18 @@ exports.sign_request = function (ikey, skey, akey, username) {
     return sig_request;
 }
 
+/**
+ * @function verifies a response from Duo Security
+ * 
+ * @param {String} ikey Integration Key
+ * @param {String} skey Secret Key
+ * @param {String} akey Application Security Key
+ * @param {String} sig_response Signature Response from Duo
+ * 
+ * @param (String/Null} Returns a string containing the username if the response checks out. Returns null if it does not.
+ * 
+ * @api public
+ */
 exports.verify_response = function (ikey, skey, akey, sig_response) {
     var parts = sig_response.split(':');
     if (parts.length != 2) {
