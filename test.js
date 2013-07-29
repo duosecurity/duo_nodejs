@@ -1,5 +1,4 @@
-require.paths.unshift('.');
-var Duo = require('duo');
+var Duo = require('./duo');
 
 var IKEY = "DIXXXXXXXXXXXXXXXXXX";
 var SKEY = "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef";
