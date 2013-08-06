@@ -1,7 +1,8 @@
 {
-  "name": "duo_nodejs",
+  "name": "duo_web",
   "version": "1.0.1",
-  "description": "Duo two-factor authentication for web applications",
+  "description": "Duo two-factor authentication for Node.js web applications",
+  "homepage": "https://www.duosecurity.com/docs/duoweb",
   "main": "index.js",
   "scripts": {
     "test": "nodeunit tests"
@@ -14,9 +15,14 @@
     "Duo Security",
     "Two-Factor Authentication"
   ],
-  "author": "",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/duosecurity/duo_nodejs/issues"
-  }
+  },
+  "licenses": [
+    {
+      "type": "Duo License",
+      "url": "https://github.com/duosecurity/duo_nodejs/blob/master/LICENSE"
+    }
+  ]
 }
