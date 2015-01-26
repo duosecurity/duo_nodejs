@@ -53,12 +53,13 @@ function _sign_vals(key, vals, prefix, expire) {
  * @param {String} key Integration's Secret Key
  * @param {String} val Value to unpack
  * @param {String} prefix DUO/APP/AUTH Prefix
+ * @param {String} ikey Integration Key
  *
  * @return {String/Null} Returns a username on successful parse. Null if not
  * 
  * @api private
  */
-function _parse_vals(key, val, prefix) {
+function _parse_vals(key, val, prefix, ikey) {
     var ts = Math.round((new Date()).getTime() / 1000);
     var parts = val.split('|');
     if (parts.length != 3) {
@@ -87,11 +88,15 @@ function _parse_vals(key, val, prefix) {
     }
 
     var user = cookie_parts[0];
-    var ikey = cookie_parts[1];
+    var u_ikey = cookie_parts[1];
     var exp = cookie_parts[2];
 
+    if (u_ikey != ikey) {
+        return null;
+    }
+
     if (ts >= parseInt(exp)) {
-        return null
+        return null;
     }
 
     return user;
@@ -111,6 +116,9 @@ function _parse_vals(key, val, prefix) {
  */
 exports.sign_request = function (ikey, skey, akey, username) {
     if (!username || username.length < 1) {
+        return ERR_USER;
+    }
+    if (username.indexOf('|') !== -1) {
         return ERR_USER;
     }
     if (!ikey || ikey.length != IKEY_LEN) {
@@ -152,8 +160,8 @@ exports.verify_response = function (ikey, skey, akey, sig_response) {
 
     var auth_sig = parts[0];
     var app_sig = parts[1];
-    var auth_user = _parse_vals(skey, auth_sig, AUTH_PREFIX);
-    var app_user = _parse_vals(akey, app_sig, APP_PREFIX);
+    var auth_user = _parse_vals(skey, auth_sig, AUTH_PREFIX, ikey);
+    var app_user = _parse_vals(akey, app_sig, APP_PREFIX, ikey);
 
     if (auth_user != app_user) {
         return null;
