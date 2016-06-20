@@ -10,9 +10,9 @@ What's here:
 
 # Usage
 
-Install by dropping duo_nodejs in node_modules and including it in your project.
+Install by dropping duo_nodejs in node_modules and including it in your project. Or using npmjs `npm install duo_web --save`
 
-```var Duo = require('duo_nodejs');```
+```var Duo = require('duo_web');```
 
 Developer documentation: <http://www.duosecurity.com/docs/duoweb>
 
