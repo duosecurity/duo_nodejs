@@ -214,7 +214,7 @@ window.Duo = (function(document, window) {
             }
 
             if (options.iframe) {
-                if ('tagName' in options.iframe) {
+                if (options.iframe.tagName) {
                     iframe = options.iframe;
                 } else if (typeof options.iframe === 'string') {
                     iframeId = options.iframe;
