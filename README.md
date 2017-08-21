@@ -1,5 +1,7 @@
 # Overview
 
+[![Build Status](https://travis-ci.org/duosecurity/duo_nodejs.svg?branch=master)](https://travis-ci.org/duosecurity/duo_nodejs)
+
 **duo_nodejs** - Duo two-factor authentication for Node.js web applications
 
 What's here:
