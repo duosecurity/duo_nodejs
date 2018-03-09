@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/duosecurity/duo_nodejs.svg?branch=master)](https://travis-ci.org/duosecurity/duo_nodejs)
 
-**duo_nodejs** - Duo two-factor authentication for NodeJS web applications: https://duo.com/docs/duoweb
+**duo_nodejs** - Duo two-factor authentication for Node.js web applications: https://duo.com/docs/duoweb
 
 This package allows a web developer to quickly add Duo's interactive, self-service, two-factor authentication to any web login form - without setting up secondary user accounts, directory synchronization, servers, or hardware.
 

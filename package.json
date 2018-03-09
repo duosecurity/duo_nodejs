@@ -1,32 +1,33 @@
 {
-  "name": "duo_web",
-  "version": "1.0.1",
-  "license": "BSD-3-Clause",
-  "description": "Duo two-factor authentication for Node.js web applications",
-  "homepage": "https://www.duosecurity.com/docs/duoweb",
-  "main": "index.js",
-  "scripts": {
-    "test": "nodeunit tests"
-  },
-  "devDependencies": {
-    "nodeunit": ">= 0.8.6"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/duosecurity/duo_nodejs.git"
-  },
-  "keywords": [
-    "Duo Security",
-    "Two-Factor Authentication"
-  ],
-  "readmeFilename": "README.md",
-  "bugs": {
-    "url": "https://github.com/duosecurity/duo_nodejs/issues"
-  },
-  "licenses": [
-    {
-      "type": "Duo License",
-      "url": "https://github.com/duosecurity/duo_nodejs/blob/master/LICENSE"
-    }
-  ]
+    "name": "duo_web",
+    "version": "1.0.1",
+    "license": "BSD-3-Clause",
+    "description": "Duo two-factor authentication for Node.js web applications",
+    "homepage": "https://www.duosecurity.com/docs/duoweb",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/duosecurity/duo_nodejs.git"
+    },
+    "scripts": {
+        "test": "nodeunit tests"
+    },
+    "devDependencies": {
+        "nodeunit": ">= 0.8.6"
+    },
+    "dependencies": {},
+    "keywords": [
+        "Duo Security",
+        "Two-Factor Authentication"
+    ],
+    "readmeFilename": "README.md",
+    "bugs": {
+        "url": "https://github.com/duosecurity/duo_nodejs/issues"
+    },
+    "licenses": [
+        {
+            "type": "Duo License",
+            "url": "https://github.com/duosecurity/duo_nodejs/blob/master/LICENSE"
+        }
+    ]
 }
