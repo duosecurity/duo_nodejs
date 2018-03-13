@@ -1,0 +1,11 @@
+{
+    "extends": "standard",
+    "plugins": [
+        "standard",
+        "promise"
+    ],
+    "rules": {
+        "camelcase": "off",
+        "node/no-deprecated-api": "off"
+    }
+}

@@ -1,1 +1,1 @@
-module.exports = require('./duo');
+module.exports = require('./duo')
