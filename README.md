@@ -27,7 +27,7 @@ $ npm install global duo_web
 Or run the following to add to your project:
 
 ```
-$ npm install --save-prod duo_web
+$ npm install --save duo_web
 ```
 
 # Using
@@ -42,9 +42,18 @@ $ node --interactive
 # Test
 
 ```
-$ npm test
+$ npm run test
 ...
 OK: 13 assertions (42ms)
+```
+
+# Lint
+
+```
+$ npm run lint
+
+> duo_web@1.0.1 lint /home/matt/duo/duo_nodejs
+> eslint duo.js index.js tests/
 ```
 
 # Support
