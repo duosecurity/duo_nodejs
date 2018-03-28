@@ -52,7 +52,7 @@ OK: 13 assertions (42ms)
 ```
 $ npm run lint
 
-> duo_web@1.0.1 lint /home/matt/duo/duo_nodejs
+> duo_web@1.0.1 lint duo_nodejs
 > eslint duo.js index.js tests/
 ```
 
