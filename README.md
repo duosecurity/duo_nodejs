@@ -21,13 +21,13 @@ $ npm install
 System:
 
 ```
-$ npm install global duo_web
+$ npm install global @duosecurity/duo_web
 ```
 
 Or run the following to add to your project:
 
 ```
-$ npm install --save duo_web
+$ npm install --save @duosecurity/duo_web
 ```
 
 # Using
@@ -52,7 +52,7 @@ OK: 13 assertions (42ms)
 ```
 $ npm run lint
 
-> duo_web@1.0.1 lint duo_nodejs
+> @duosecurity/duo_web@1.0.3 lint duo_nodejs
 > eslint duo.js index.js tests/
 ```
 
