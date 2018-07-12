@@ -1,5 +1,5 @@
 {
-    "name": "duo_web",
+    "name": "@duosecurity/duo_web",
     "version": "1.0.3",
     "license": "BSD-3-Clause",
     "description": "Duo two-factor authentication for Node.js web applications",
