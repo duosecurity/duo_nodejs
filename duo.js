@@ -38,11 +38,7 @@ function _sign_vals (key, vals, prefix, expire) {
 
   var val = vals + '|' + exp
 
-  /**
-   * Move to Buffer.from and remove no-deprecated-api
-   * lint exception when we remove Node v4 support
-   */
-  var b64 = new Buffer(val).toString('base64')
+  var b64 = Buffer.from(val).toString('base64')
   var cookie = prefix + '|' + b64
 
   var sig = crypto.createHmac('sha1', key)
@@ -87,11 +83,7 @@ function _parse_vals (key, val, prefix, ikey) {
     return null
   }
 
-  /**
-   * Move to Buffer.from and remove no-deprecated-api
-   * lint exception when we remove Node v4 support
-   */
-  var cookie_parts = new Buffer(u_b64, 'base64').toString('utf8').split('|')
+  var cookie_parts = Buffer.from(u_b64, 'base64').toString('utf8').split('|')
   if (cookie_parts.length !== 3) {
     return null
   }
