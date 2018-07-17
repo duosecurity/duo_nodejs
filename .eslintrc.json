@@ -5,7 +5,6 @@
         "promise"
     ],
     "rules": {
-        "camelcase": "off",
-        "node/no-deprecated-api": "off"
+        "camelcase": "off"
     }
 }
