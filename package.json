@@ -36,5 +36,8 @@
             "type": "Duo License",
             "url": "https://github.com/duosecurity/duo_nodejs/blob/master/LICENSE"
         }
-    ]
+    ],
+    "optionalDependencies": {
+        "@duosecurity/duo_api": "https://github.com/duosecurity/duo_api_nodejs.git"
+    }
 }

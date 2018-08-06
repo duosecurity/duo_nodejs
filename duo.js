@@ -248,7 +248,7 @@ var verify_app_blob = function (ikey, akey, auth_user, app_sig) {
 /**
  * @function Get and return a frame init txid from init api call
  *
- * @param {Client} client client object for webSDK 2.0 calls
+ * @param {Client} client client object for webSDK 3 calls
  * @param {String} username username of the user
  * @param {String} ikey Integration Security Key
  * @param {String} akey Application Security Key
@@ -272,8 +272,8 @@ var initialize_auth = function (client, {username, ikey, akey, client_version = 
 /**
  * @function Get validate, and return a frame authentication response or null.
  *
- * @param {Client} client client object for webSDK 2.0 calls
- * @param {String} txid transaction id
+ * @param {Client} client client object for webSDK 3 calls
+ * @param {String} response_txid The response transaction id
  * @param {String} ikey Integration Security Key
  * @param {String} akey Application Security Key
  * @param {Function} callback called after response from duo security
@@ -282,8 +282,8 @@ var initialize_auth = function (client, {username, ikey, akey, client_version = 
  *
  * @api public
 */
-var verify_auth = function (client, {txid, ikey, akey}, callback) {
-  client.auth_response(txid, (response) => {
+var verify_auth = function (client, {response_txid, ikey, akey}, callback) {
+  client.auth_response(response_txid, (response) => {
     if (!verify_app_blob(ikey, akey, response.response.uname, response.response.app_blob)) {
       callback(null)
     } else {
