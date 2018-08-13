@@ -11,6 +11,8 @@ const SKEY = ''
 const AKEY = ''
 const API_HOSTNAME = ''
 
+let version = '2.0.0'
+let version_string = `simple demo ${version}`
 /**
  * Returns templated string with api_hostname and sig_request.
  *
@@ -64,7 +66,7 @@ const server = http.createServer((req, res) => {
       let {username} = query
       if (username) {
         // initializes secondary authentication process
-        duo_web.initialize_auth(client, {username, ikey: IKEY, akey: AKEY}, function (resp) {
+        duo_web.initialize_auth(client, {username, ikey: IKEY, akey: AKEY, client_version: version_string}, function (resp) {
           var txid = resp.response.txid
           // shows the IFrame
           let duo_frame = IFrame(API_HOSTNAME, txid)
