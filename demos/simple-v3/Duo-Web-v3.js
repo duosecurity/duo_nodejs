@@ -332,7 +332,7 @@
 
         // point the iframe at Duo
         iframe.src = [
-            'https://', host, '/frame/web/v2/auth?tx=', initTxid,
+            'https://', host, '/frame/web/v3/auth?tx=', initTxid,
             '&parent=', encodeURIComponent(document.location.href),
             '&v=3.0'
         ].join('');
