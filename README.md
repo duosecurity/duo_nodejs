@@ -21,7 +21,7 @@ $ npm install
 System:
 
 ```
-$ npm install global @duosecurity/duo_web
+$ npm install --global @duosecurity/duo_web
 ```
 
 Or run the following to add to your project:
@@ -34,7 +34,7 @@ $ npm install --save @duosecurity/duo_web
 
 ```
 $ node --interactive
-> const duo_web = require('duo_web');
+> const duo_web = require('@duosecurity/duo_web');
 > duo_web.sign_request(ikey, skey, akey, username);
 'TX|...TX_SIGNATURE...==|...TX_HASH...:APP|...APP_SIGNATURE...==|...APP_HASH...'
 ```
