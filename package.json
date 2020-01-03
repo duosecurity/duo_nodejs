@@ -1,6 +1,6 @@
 {
     "name": "@duosecurity/duo_web",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "license": "BSD-3-Clause",
     "description": "Duo two-factor authentication for Node.js web applications",
     "homepage": "https://www.duosecurity.com/docs/duoweb",
@@ -37,8 +37,5 @@
             "type": "Duo License",
             "url": "https://github.com/duosecurity/duo_nodejs/blob/master/LICENSE"
         }
-    ],
-    "optionalDependencies": {
-        "@duosecurity/duo_api": "https://github.com/duosecurity/duo_api_nodejs.git"
-    }
+    ]
 }
