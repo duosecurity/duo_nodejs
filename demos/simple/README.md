@@ -1,4 +1,4 @@
-Demonstration of a simple Nodejs web server with Duo authentication using WebSDK 3 authentication flow.
+Demonstration of a simple Nodejs web server with Duo authentication.
 
 # Configuration: #
 To set up, add ikey, skey, akey, hostname, and post_action to server.js. For more

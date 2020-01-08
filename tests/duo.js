@@ -6,7 +6,6 @@ var IKEY = 'DIXXXXXXXXXXXXXXXXXX'
 var WRONG_IKEY = 'DIXXXXXXXXXXXXXXXXXY'
 var SKEY = 'deadbeefdeadbeefdeadbeefdeadbeefdeadbeef'
 var AKEY = 'useacustomerprovidedapplicationsecretkey'
-var WRONG_AKEY = 'useacustomerprovidedapplicationsecretkeY'
 var USER = 'testuser'
 var INVALID_RESPONSE = 'AUTH|INVALID|SIG'
 var EXPIRED_RESPONSE = 'AUTH|dGVzdHVzZXJ8RElYWFhYWFhYWFhYWFhYWFhYWFh8MTMwMDE1Nzg3NA==|cb8f4d60ec7c261394cd5ee5a17e46ca7440d702'
@@ -94,75 +93,6 @@ describe('Verify Checks', function () {
   it('wrong ikey', function (done) {
     var user = Duo.verify_response(WRONG_IKEY, SKEY, AKEY, FUTURE_RESPONSE + ':' + valid_app_sig)
     assert.equal(user, null, 'Wrong IKEY check failed')
-    done()
-  })
-})
-
-describe('Signing App Blob Checks', function () {
-  it('sign request with ikey/akey and user', function (done) {
-    var request_sig = Duo.sign_app_blob(IKEY, AKEY, USER)
-    assert.notEqual(request_sig, null)
-    done()
-  })
-
-  it('sign request without a user', function (done) {
-    assert.throws(function () {
-      Duo.sign_app_blob(IKEY, AKEY, '')
-    }, Duo.UsernameError)
-    done()
-  })
-
-  it('sign request with invalid user', function (done) {
-    assert.throws(function () {
-      Duo.sign_app_blob(IKEY, AKEY, 'in|valid')
-    }, Duo.UsernameError)
-    done()
-  })
-
-  it('sign request with an invalid ikey', function (done) {
-    assert.throws(function () {
-      Duo.sign_app_blob('invalid', AKEY, USER)
-    }, Duo.IkeyError)
-    done()
-  })
-
-  it('sign request with an invalid akey', function (done) {
-    assert.throws(function () {
-      Duo.sign_app_blob(IKEY, 'invalid', USER)
-    }, Duo.AkeyError)
-    done()
-  })
-})
-
-describe('Verifying App Blob Checks', function () {
-  it('verify response on valid signature', function (done) {
-    var request_sig = Duo.sign_app_blob(IKEY, AKEY, USER)
-    assert.notEqual(request_sig, null)
-    done()
-  })
-
-  it('verify app blob invalid prefix', function (done) {
-    var app_blob = Duo.sign_app_blob(IKEY, AKEY, USER)
-    var inv_app_blob = app_blob.replace('A', 'x')
-    assert.equal(Duo.verify_app_blob(IKEY, AKEY, USER, inv_app_blob), false, 'verify app blob failed on invalid app_blob')
-    done()
-  })
-
-  it('verify app blob invalid user', function (done) {
-    var app_blob = Duo.sign_app_blob(IKEY, AKEY, USER)
-    assert.equal(Duo.verify_app_blob(IKEY, AKEY, 'invalid', app_blob), false, 'verify app blob failed on invalid user')
-    done()
-  })
-
-  it('verify app blob invalid ikey', function (done) {
-    var app_blob = Duo.sign_app_blob(IKEY, AKEY, USER)
-    assert.equal(Duo.verify_app_blob(WRONG_IKEY, AKEY, USER, app_blob), false, 'verify app blob failed on invalid ikey')
-    done()
-  })
-
-  it('verify app blob invalid akey', function (done) {
-    var app_blob = Duo.sign_app_blob(IKEY, AKEY, USER)
-    assert.equal(Duo.verify_app_blob(IKEY, WRONG_AKEY, USER, app_blob), false, 'verify app blob failed on invalid akey')
     done()
   })
 })

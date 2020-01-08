@@ -4,7 +4,6 @@ var DUO_PREFIX = 'TX'
 var APP_PREFIX = 'APP'
 var AUTH_PREFIX = 'AUTH'
 
-var INIT_EXPIRE = 300
 var DUO_EXPIRE = 300
 var APP_EXPIRE = 3600
 var IKEY_LEN = 20
@@ -53,7 +52,7 @@ class AkeyError extends Error {
  *
  * @api private
  */
-function _sign_vals (key, vals, prefix, expire, digestmod = 'sha1') {
+function _sign_vals (key, vals, prefix, expire) {
   var exp = Math.round((new Date()).getTime() / 1000) + expire
 
   var val = vals + '|' + exp
@@ -61,7 +60,7 @@ function _sign_vals (key, vals, prefix, expire, digestmod = 'sha1') {
   var b64 = Buffer.from(val).toString('base64')
   var cookie = prefix + '|' + b64
 
-  var sig = crypto.createHmac(digestmod, key)
+  var sig = crypto.createHmac('sha1', key)
     .update(cookie)
     .digest('hex')
 
@@ -80,7 +79,7 @@ function _sign_vals (key, vals, prefix, expire, digestmod = 'sha1') {
  *
  * @api private
  */
-function _parse_vals (key, val, prefix, ikey, digestmod = 'sha1') {
+function _parse_vals (key, val, prefix, ikey) {
   var ts = Math.round((new Date()).getTime() / 1000)
   var parts = val.split('|')
   if (parts.length !== 3) {
@@ -91,11 +90,11 @@ function _parse_vals (key, val, prefix, ikey, digestmod = 'sha1') {
   var u_b64 = parts[1]
   var u_sig = parts[2]
 
-  var sig = crypto.createHmac(digestmod, key)
+  var sig = crypto.createHmac('sha1', key)
     .update(u_prefix + '|' + u_b64)
     .digest('hex')
 
-  if (crypto.createHmac(digestmod, key).update(sig).digest('hex') !== crypto.createHmac(digestmod, key).update(u_sig).digest('hex')) {
+  if (crypto.createHmac('sha1', key).update(sig).digest('hex') !== crypto.createHmac('sha1', key).update(u_sig).digest('hex')) {
     return null
   }
 
@@ -191,114 +190,9 @@ var verify_response = function (ikey, skey, akey, sig_response) {
   return auth_user
 }
 
-/**
- * @function sign's a login request to be passed onto Duo Security
- *
- * @param {String} ikey Integration Key
- * @param {String} akey Application Security Key
- * @param {String} username Username
- *
- * @return {String} Duo Signature
- *
- * @api public
- */
-var sign_app_blob = function (ikey, akey, username) {
-  if (!username || username.length < 1) {
-    throw new UsernameError('Username is invalid.')
-  }
-  if (username.indexOf('|') !== -1) {
-    throw new UsernameError('Username is invalid.')
-  }
-  if (!ikey || ikey.length !== IKEY_LEN) {
-    throw new IkeyError('Duo integration key is invalid.')
-  }
-  if (!akey || akey.length < AKEY_LEN) {
-    throw new AkeyError('Application secret key is invalid.')
-  }
-
-  var vals = username + '|' + ikey
-
-  var app_sig = _sign_vals(akey, vals, APP_PREFIX, APP_EXPIRE, 'sha512')
-  return app_sig
-}
-
-/**
- * @function verifies a response from Duo Security
- *
- * @param {String} ikey Integration Key
- * @param {String} akey Application Security Key
- * @param {String} auth_user Returned username to verify
- * @param {String} app_sig The signed app_blob from the response response POST'ed
- *
- * @return {Boolean} Return True if auth_user validates against app_sig,
- * otherwise return False.
- *
- * @api public
- */
-var verify_app_blob = function (ikey, akey, auth_user, app_sig) {
-  let app_user = ''
-  try {
-    app_user = _parse_vals(akey, app_sig, APP_PREFIX, ikey, 'sha512')
-  } catch (err) {
-    return false
-  }
-  return auth_user === app_user
-}
-
-/**
- * @function Get and return a frame init txid from init api call
- *
- * @param {Client} client client object for webSDK 3 calls
- * @param {String} username username of the user
- * @param {String} ikey Integration Security Key
- * @param {String} akey Application Security Key
- * @param {String} client_version current version
- * @param {Bool} enroll_only is user enrolling
- * @param {Function} callback called after response from duo security
- *
- * @return {String} Return the response from the init api call
- *
- * @api public
-*/
-var initialize_auth = function (client, {username, ikey, akey, client_version = 2.0, enroll_only = false}, callback) {
-  var app_blob = sign_app_blob(ikey, akey, username)
-  var expire = Math.floor((new Date()).getTime() / 1000) + INIT_EXPIRE
-  client_version = 'duo_nodejs ' + client_version
-  client.init(username, app_blob, expire, client_version, enroll_only, (txid) => {
-    callback(txid)
-  })
-}
-
-/**
- * @function Get validate, and return a frame authentication response or null.
- *
- * @param {Client} client client object for webSDK 3 calls
- * @param {String} response_txid The response transaction id
- * @param {String} ikey Integration Security Key
- * @param {String} akey Application Security Key
- * @param {Function} callback called after response from duo security
- *
- * @return {String} Return response if the app_blob is verified, null otherwise
- *
- * @api public
-*/
-var verify_auth = function (client, {response_txid, ikey, akey}, callback) {
-  client.auth_response(response_txid, (response) => {
-    if (!verify_app_blob(ikey, akey, response.response.uname, response.response.app_blob)) {
-      callback(null)
-    } else {
-      callback(response)
-    }
-  })
-}
-
 module.exports = {
   'sign_request': sign_request,
   'verify_response': verify_response,
-  'sign_app_blob': sign_app_blob,
-  'verify_app_blob': verify_app_blob,
-  'initialize_auth': initialize_auth,
-  'verify_auth': verify_auth,
   'ERR_USER': ERR_USER,
   'ERR_IKEY': ERR_IKEY,
   'ERR_AKEY': ERR_AKEY,
