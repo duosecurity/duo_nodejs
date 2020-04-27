@@ -1,6 +1,10 @@
 # Overview
 
 [![Build Status](https://travis-ci.org/duosecurity/duo_nodejs.svg?branch=master)](https://travis-ci.org/duosecurity/duo_nodejs)
+[![Issues](https://img.shields.io/github/issues/duosecurity/duo_nodejs)](https://github.com/duosecurity/duo_nodejs/issues)
+[![Forks](https://img.shields.io/github/forks/duosecurity/duo_nodejs)](https://github.com/duosecurity/duo_nodejs/network/members)
+[![Stars](https://img.shields.io/github/stars/duosecurity/duo_nodejs)](https://github.com/duosecurity/duo_nodejs/stargazers)
+[![License](https://img.shields.io/badge/License-View%20License-orange)](https://github.com/duosecurity/duo_nodejs/blob/master/LICENSE)
 
 **duo_nodejs** - Duo two-factor authentication for Node.js web applications: https://duo.com/docs/duoweb
 
