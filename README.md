@@ -6,7 +6,7 @@
 [![Stars](https://img.shields.io/github/stars/duosecurity/duo_nodejs)](https://github.com/duosecurity/duo_nodejs/stargazers)
 [![License](https://img.shields.io/badge/License-View%20License-orange)](https://github.com/duosecurity/duo_nodejs/blob/master/LICENSE)
 
-**duo_nodejs** - Duo two-factor authentication for Node.js web applications: https://duo.com/docs/duoweb
+**duo_nodejs** - Duo two-factor authentication for Node.js web applications: https://duo.com/docs/duoweb-v2
 
 This package allows a web developer to quickly add Duo's interactive, self-service, two-factor authentication to any web login form - without setting up secondary user accounts, directory synchronization, servers, or hardware.
 
